@@ -101,7 +101,7 @@ def predict_wide_record(record: Dict[str, Any]):
     processed_df = run_full_preprocessing_pipeline_from_df(raw_df)
     #print('processed_df :',processed_df)
     result_df = predict_failure(processed_df)
-    #print('result_df :',result_df)
+    print('result_df :',result_df)
     return result_df[['height', 'hour','type_failure_pred']].to_dict(orient="records")
 
 # 📦 Batch endpoint
