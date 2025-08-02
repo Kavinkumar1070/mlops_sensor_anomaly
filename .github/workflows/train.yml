@@ -4,9 +4,12 @@ on:
   push:
     paths:
       - 'train.py'
+      - 'preprocessing/**'
       - '.github/workflows/train.yml'
-      - 'dataset/**'
-      - 'output_models/**'
+      - 'requirements.txt'
+      - 'Dockerfile.train'
+      - '.trigger_train'   # ✅ Include this line to allow manual triggers
+
 
 jobs:
   train:

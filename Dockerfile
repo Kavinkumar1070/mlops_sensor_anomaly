@@ -12,6 +12,7 @@ RUN pip install -r requirements.txt
 COPY main.py .
 COPY preprocessing/ ./preprocessing/
 COPY exp_log/ ./exp_log/
+COPY output_models/ ./output_models/
 
 EXPOSE 8000
 

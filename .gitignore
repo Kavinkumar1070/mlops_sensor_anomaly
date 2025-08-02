@@ -16,7 +16,6 @@ venv/
 
 # Datasets and models
 dataset/
-#output_models/
 
 # IDE
 .vscode/
