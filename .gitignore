@@ -1,0 +1,30 @@
+# Python
+*.pyc
+__pycache__/
+*.pkl
+*.joblib
+
+# Virtual environment
+venv/
+.env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Datasets and models
+dataset/
+output_models/
+
+# IDE
+.vscode/
+.idea/
+
+# Ignore raw datasets
+dataset/*.csv
+
+# OS
+.DS_Store
+Thumbs.db
