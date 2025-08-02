@@ -31,7 +31,7 @@ jobs:
 
       - name: 🐳 Build Docker Image (optional)
         run: |
-          docker build -f Dockerfile.train -t yourusername/ml-train:latest .
+          docker build -f Dockerfile.train -t ${{ secrets.DOCKER_USERNAME }}/ml-train:latest .
 
       - name: 📤 Login to Docker Hub (optional)
         uses: docker/login-action@v2
@@ -41,4 +41,4 @@ jobs:
 
       - name: 🚢 Push Docker Image (optional)
         run: |
-          docker push yourusername/ml-train:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/ml-train:latest
