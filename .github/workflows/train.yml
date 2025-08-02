@@ -3,7 +3,7 @@ name: 🚀 Train ML Model
 on:
   push:
     paths:
-      - 'train_model.py'
+      - 'train.py'
       - '.github/workflows/train.yml'
       - 'dataset/**'
       - 'output_models/**'
