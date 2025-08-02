@@ -25,6 +25,8 @@ jobs:
         pip install -r requirements.txt
 
     - name: 🚀 Run Training Pipeline
+      env:
+        AZURE_BLOB_URL: ${{ secrets.AZURE_BLOB_URL }}
       run: python train.py
 
     - name: 🐳 Log in to Docker Hub
