@@ -7,3 +7,8 @@ matplotlib
 pyod
 pyodbc
 requests
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart
+
