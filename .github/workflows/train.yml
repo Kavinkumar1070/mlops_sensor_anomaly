@@ -7,7 +7,6 @@ on:
       - '.github/workflows/train.yml'
       - 'dataset/**'
       - 'output_models/**'
-  workflow_dispatch:
 
 jobs:
   train:
