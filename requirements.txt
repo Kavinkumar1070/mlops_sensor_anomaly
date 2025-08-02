@@ -4,7 +4,6 @@ scikit-learn
 joblib
 pyod
 matplotlib
-pyod
 pyodbc
 requests
 fastapi
