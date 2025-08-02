@@ -6,3 +6,4 @@ pyod
 matplotlib
 pyod
 pyodbc
+requests
