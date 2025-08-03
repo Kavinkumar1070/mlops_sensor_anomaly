@@ -1,7 +1,9 @@
-name: 🛰️ Deploy Inference API
+name: 🛰️ Deploy Inference API to Azure
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'main.py'
       - 'output_models/**'
@@ -27,20 +29,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: 🧪 Lint & test (optional)
-      run: |
-        echo "✅ Add unit tests here (optional)"
-
-    - name: 🐳 Build Inference Docker Image
-      run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/inference-api:latest .
-
-    - name: 🔐 Login to Docker Hub
-      uses: docker/login-action@v2
+    - name: 🔐 Azure Login
+      uses: azure/login@v1
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: 🚢 Push Docker Image to Docker Hub
+    - name: 🐳 Build Docker Image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/inference-api:latest
+        docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/inference-api:latest .
+
+    - name: 🔐 Login to ACR
+      run: |
+        az acr login --name ${{ secrets.ACR_NAME }}
+
+    - name: 🚢 Push to ACR
+      run: |
+        docker push ${{ secrets.ACR_NAME }}.azurecr.io/inference-api:latest
+
+    - name: 🌐 Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.WEBAPP_NAME }}
+        images: ${{ secrets.ACR_NAME }}.azurecr.io/inference-api:latest
