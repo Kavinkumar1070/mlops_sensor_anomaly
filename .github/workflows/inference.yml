@@ -1,15 +1,17 @@
-name: 🛰️ Deploy Inference API to Azure
+name: 🚀 Deploy Inference API to Azure
 
 on:
   push:
-    branches:
-      - main
     paths:
       - 'main.py'
       - 'output_models/**'
       - 'requirements.txt'
       - 'Dockerfile'
       - '.github/workflows/inference.yml'
+
+permissions:
+  id-token: write       # 👈 REQUIRED for Azure OIDC login
+  contents: read        # (default) allow GitHub Actions to read repo content
 
 jobs:
   deploy:
@@ -19,22 +21,17 @@ jobs:
     - name: 🔄 Checkout Repo
       uses: actions/checkout@v3
 
-    - name: 🐍 Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.11
 
-    - name: 📦 Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+          # ⬇️ Your existing Docker build & deploy steps go here...
 
-    - name: 🔐 Azure Login
+    - name: 🔐 Azure Login via OIDC
       uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+
 
     - name: 🐳 Build Docker Image
       run: |
