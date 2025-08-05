@@ -81,6 +81,9 @@ def predict_failure(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+@app.get("/")
+def read_root():
+    return {"message": "🎉 FastAPI app deployed via Azure CD pipeline!"}
 
 @app.post("/predict_wide_record")
 def predict_wide_record(record: Dict[str, Any]):
